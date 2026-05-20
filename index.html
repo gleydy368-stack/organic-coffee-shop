@@ -166,21 +166,21 @@ button.pagar { background-color: #2e8b57; width: 100%; font-size: 1.1rem; }
   <div class="producto">
     <img src="product.jpeg">
     <h3>Bolsa 250g</h3>
-    <p>$20.00</p>
+    <p>S/20.00</p>
     <button onclick="agregarAlCarrito(event,'Café molido 250g',20)">Agregar</button>
   </div>
 
   <div class="producto">
     <img src="product 2.jpeg">
     <h3>Bolsa 500g</h3>
-    <p>$35.00</p>
+    <p>S/35.00</p>
     <button onclick="agregarAlCarrito(event,'Café molido 500g',35)">Agregar</button>
   </div>
 
   <div class="producto">
     <img src="product.jpeg">
     <h3>Bolsa 1kg</h3>
-    <p>$65.00</p>
+    <p>S/65.00</p>
     <button onclick="agregarAlCarrito(event,'Café molido 1kg',65)">Agregar</button>
   </div>
 
@@ -192,21 +192,21 @@ button.pagar { background-color: #2e8b57; width: 100%; font-size: 1.1rem; }
   <div class="producto">
     <img src="product.jpeg">
     <h3>Bolsa 250g</h3>
-    <p>$18.00</p>
+    <p>S/18.00</p>
     <button onclick="agregarAlCarrito(event,'Café en grano 250g',18)">Agregar</button>
   </div>
 
   <div class="producto">
     <img src="product 2.jpeg">
     <h3>Bolsa 500g</h3>
-    <p>$25.00</p>
+    <p>S/25.00</p>
     <button onclick="agregarAlCarrito(event,'Café en grano 500g',25)">Agregar</button>
   </div>
 
   <div class="producto">
     <img src="product 2.jpeg">
     <h3>Bolsa 1kg</h3>
-    <p>$50.00</p>
+    <p>S/50.00</p>
     <button onclick="agregarAlCarrito(event,'Café en grano 1kg',50)">Agregar</button>
   </div>
 
@@ -227,7 +227,7 @@ button.pagar { background-color: #2e8b57; width: 100%; font-size: 1.1rem; }
 
 
   <div id="carritoItems"></div>
-  <h3 id="totalCarrito">Total: $0.00</h3>
+  <h3 id="totalCarrito">Total: S/0.00</h3>
 
   <button class="pagar" onclick="enviarPedidoWhatsApp()">Enviar pedido por WhatsApp</button>
   <button class="back-button" onclick="ocultarSecciones()">← Volver</button>
@@ -320,7 +320,7 @@ function enviarPedidoWhatsApp(){
     total+=p.precio;
   });
 
-  msg += `%0A💰 *Total:* $${total.toFixed(2)}%0A`;
+  msg += `%0A💰 *Total:* ${total.toFixed(2)}%0A`;
   msg += `👉 Indicar medio de pago, por favor.`;
 
   localStorage.removeItem("carrito");
