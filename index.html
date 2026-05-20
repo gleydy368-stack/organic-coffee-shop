@@ -117,13 +117,64 @@ button {
 }
 
 button.eliminar { background-color: #f44336; }
-button.pagar { background-color: #2e8b57; width: 100%; font-size: 1.1rem; }
-.back-button { background-color: #555; }
+button.vaciar { background-color: #ff9800; margin-bottom: 15px; }
+button.pagar { background-color: #2e8b57; width: 100%; font-size: 1.2rem; padding: 15px; font-weight: bold; }
+.back-button { background-color: #555; width: 100%; max-width: 200px; margin: 20px auto 0 auto; display: block; }
 
 .footer-text {
   text-align: center;
   padding: 15px;
   background-color: rgba(0,0,0,0.6);
+}
+
+/* Estilos para el formulario del carrito */
+.carrito-page input, .carrito-page select, .carrito-page textarea {
+  width: 90%;
+  max-width: 500px;
+  padding: 12px;
+  margin-bottom: 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.carrito-page textarea {
+  height: 80px;
+  resize: none;
+  font-family: Arial, sans-serif;
+}
+
+.ubicacion-grupo {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.seccion-instrucciones {
+  max-width: 500px;
+  background: rgba(255,255,255,0.1);
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  text-align: left;
+  font-size: 0.9rem;
+  border-left: 4px solid #2e8b57;
+}
+
+.seccion-instrucciones h4 {
+  margin: 0 0 8px 0;
+  color: #4CAF50;
+}
+
+.seccion-instrucciones ol {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.seccion-instrucciones li {
+  margin-bottom: 5px;
 }
 </style>
 </head>
@@ -159,6 +210,12 @@ button.pagar { background-color: #2e8b57; width: 100%; font-size: 1.1rem; }
     <h3>Café en Grano</h3>
     <p>Granos seleccionados artesanalmente</p>
   </div>
+
+  <div class="producto" onclick="mostrarCafeteras()">
+    <img src="cafetera.png">
+    <h3>Cafeteras y Accesorios</h3>
+    <p>Los mejores métodos de extracción</p>
+  </div>
 </div>
 
 <!-- CAFE MOLIDO -->
@@ -166,22 +223,22 @@ button.pagar { background-color: #2e8b57; width: 100%; font-size: 1.1rem; }
   <div class="producto">
     <img src="product.jpeg">
     <h3>Bolsa 250g</h3>
-    <p>S/20.00</p>
-    <button onclick="agregarAlCarrito(event,'Café molido 250g',20)">Agregar</button>
+    <p>S/25.00</p>
+    <button onclick="agregarAlCarrito(event,'Café molido 250g',25)">Agregar</button>
   </div>
 
   <div class="producto">
     <img src="product 2.jpeg">
     <h3>Bolsa 500g</h3>
-    <p>S/35.00</p>
-    <button onclick="agregarAlCarrito(event,'Café molido 500g',35)">Agregar</button>
+    <p>S/45.00</p>
+    <button onclick="agregarAlCarrito(event,'Café molido 500g',45)">Agregar</button>
   </div>
 
   <div class="producto">
     <img src="product.jpeg">
     <h3>Bolsa 1kg</h3>
-    <p>S/65.00</p>
-    <button onclick="agregarAlCarrito(event,'Café molido 1kg',65)">Agregar</button>
+    <p>S/80.00</p>
+    <button onclick="agregarAlCarrito(event,'Café molido 1kg',80)">Agregar</button>
   </div>
 
   <button class="back-button" onclick="ocultarSecciones()">← Volver</button>
@@ -192,50 +249,118 @@ button.pagar { background-color: #2e8b57; width: 100%; font-size: 1.1rem; }
   <div class="producto">
     <img src="product.jpeg">
     <h3>Bolsa 250g</h3>
-    <p>S/18.00</p>
-    <button onclick="agregarAlCarrito(event,'Café en grano 250g',18)">Agregar</button>
+    <p>S/25.00</p>
+    <button onclick="agregarAlCarrito(event,'Café en grano 250g',25)">Agregar</button>
   </div>
 
   <div class="producto">
     <img src="product 2.jpeg">
     <h3>Bolsa 500g</h3>
-    <p>S/25.00</p>
-    <button onclick="agregarAlCarrito(event,'Café en grano 500g',25)">Agregar</button>
+    <p>S/42.00</p>
+    <button onclick="agregarAlCarrito(event,'Café en grano 500g',42)">Agregar</button>
   </div>
 
   <div class="producto">
     <img src="product 2.jpeg">
     <h3>Bolsa 1kg</h3>
-    <p>S/50.00</p>
-    <button onclick="agregarAlCarrito(event,'Café en grano 1kg',50)">Agregar</button>
+    <p>S/75.00</p>
+    <button onclick="agregarAlCarrito(event,'Café en grano 1kg',75)">Agregar</button>
   </div>
 
   <button class="back-button" onclick="ocultarSecciones()">← Volver</button>
 </div>
 
-<!-- CARRITO -->
-<div id="carritoPage" class="carrito-page hidden">
-  <h2>🛒 Carrito</h2>
+<!-- CAFETERAS Y ACCESORIOS -->
+<div id="cafeterasPage" class="productos hidden">
+  <div class="producto">
+    <img src="Prensa.png">
+    <h3>Prensa Francesa (600ml)</h3>
+    <p>S/45.00</p>
+    <button onclick="agregarAlCarrito(event,'Prensa Francesa 600ml',45)">Agregar</button>
+  </div>
 
-  <input id="nombreCliente" placeholder="Nombre completo" style="width:90%">
-  <input id="direccionCliente" placeholder="Dirección" style="width:90%">
-  <input id="telefonoCliente" placeholder="Teléfono" style="width:90%">
+  <div class="producto">
+    <img src="Moka.png">
+    <h3>Cafetera Moka Italiana</h3>
+    <p>S/60.00</p>
+    <button onclick="agregarAlCarrito(event,'Cafetera Moka Italiana',60)">Agregar</button>
+  </div>
 
-  <p class="aviso-datos">
-  ⚠️ Verifica tu información, ya que será usada para el envío del producto.
-</p>
+  <div class="producto">
+    <img src="cono.png">
+    <h3>Cono de Goteo V60</h3>
+    <p>S/30.00</p>
+    <button onclick="agregarAlCarrito(event,'Cono de Goteo V60',30)">Agregar</button>
+  </div>
 
-
-  <div id="carritoItems"></div>
-  <h3 id="totalCarrito">Total: S/0.00</h3>
-
-  <button class="pagar" onclick="enviarPedidoWhatsApp()">Enviar pedido por WhatsApp</button>
   <button class="back-button" onclick="ocultarSecciones()">← Volver</button>
 </div>
 
-<div class="footer-text">Organic Coffee © 2025</div>
+<!-- CARRITO AVANZADO -->
+<div id="carritoPage" class="carrito-page hidden">
+  <h2>🛒 Tu Carrito de Compras</h2>
+
+  <!-- Sección informativa de pago -->
+  <div class="seccion-instrucciones">
+    <h4>¿Cómo realizo mi pago?</h4>
+    <ol>
+      <li>Completa tus datos de envío abajo.</li>
+      <li>Presiona el botón verde para enviar el pedido a nuestro WhatsApp.</li>
+      <li>Te responderemos con el costo del envío y nuestros QR de <b>Yape, Plin</b> o cuentas bancarias para cerrar tu compra.</li>
+    </ol>
+  </div>
+
+  <input id="nombreCliente" placeholder="Nombre completo *">
+  <input id="telefonoCliente" placeholder="Teléfono / WhatsApp *">
+  
+  <div class="ubicacion-grupo">
+    <input id="departamentoCliente" placeholder="Departamento * (Ej: Lima, Piura)">
+    <input id="provinciaCliente" placeholder="Provincia * (Ej: Lima, Sullana)">
+    <input id="distritoCliente" placeholder="Distrito * (Ej: Miraflores, Tambogrande)">
+  </div>
+  
+  <input id="direccionCliente" placeholder="Dirección exacta * (Av, Calle, Nro, Dpto)">
+  <input id="referenciaCliente" placeholder="Referencia de la casa (Ej: Frente a parque)">
+  
+  <!-- Tipo de Entrega -->
+  <select id="entregaCliente">
+    <option value="Envío a domicilio">🛵 Deseo Envío a Domicilio / Oficina</option>
+    <option value="Recojo en Agencia (Shalom/Olva)">📦 Deseo Recojo en Agencia (Shalom / Olva Courier)</option>
+  </select>
+
+  <!-- Notas especiales -->
+  <textarea id="notasCliente" placeholder="Notas adicionales (Ej: Tipo de molienda Fina/Gruesa, si es para regalo, etc.)"></textarea>
+
+  <div id="carritoItems"></div>
+  
+  <button class="vaciar" id="btnVaciar" onclick="vaciarCarrito()">🗑️ Vaciar Carrito</button>
+  
+  <h3 id="totalCarrito">Total: S/0.00</h3>
+
+  <button class="pagar" onclick="enviarPedidoWhatsApp()">👉 Confirmar y pedir por WhatsApp</button>
+  <button class="back-button" onclick="ocultarSecciones()">← Volver a la tienda</button>
+</div>
+
+<div class="footer-text">Organic Coffee © 2026</div>
 
 <script>
+const productos = document.getElementById("productos");
+const cafeMolidoPage = document.getElementById("cafeMolidoPage");
+const cafeGranoPage = document.getElementById("cafeGranoPage");
+const cafeterasPage = document.getElementById("cafeterasPage");
+const carritoPage = document.getElementById("carritoPage");
+const totalCarrito = document.getElementById("totalCarrito");
+
+const nombreCliente = document.getElementById("nombreCliente");
+const telefonoCliente = document.getElementById("telefonoCliente");
+const departamentoCliente = document.getElementById("departamentoCliente");
+const provinciaCliente = document.getElementById("provinciaCliente");
+const distritoCliente = document.getElementById("distritoCliente");
+const direccionCliente = document.getElementById("direccionCliente");
+const referenciaCliente = document.getElementById("referenciaCliente");
+const entregaCliente = document.getElementById("entregaCliente");
+const notasCliente = document.getElementById("notasCliente");
+
 function actualizarCarrito(){
   const cart = JSON.parse(localStorage.getItem("carrito")) || [];
   document.getElementById("cart-count").textContent = cart.length;
@@ -247,6 +372,7 @@ function agregarAlCarrito(e,nombre,precio){
   cart.push({nombre,precio});
   localStorage.setItem("carrito",JSON.stringify(cart));
   actualizarCarrito();
+  alert("¡" + nombre + " agregado al carrito!");
 }
 
 function mostrarCafeMolido(){
@@ -259,10 +385,16 @@ function mostrarCafeGrano(){
   cafeGranoPage.classList.remove("hidden");
 }
 
+function mostrarCafeteras(){
+  productos.classList.add("hidden");
+  cafeterasPage.classList.remove("hidden");
+}
+
 function mostrarCarrito(){
   productos.classList.add("hidden");
   cafeMolidoPage.classList.add("hidden");
   cafeGranoPage.classList.add("hidden");
+  cafeterasPage.classList.add("hidden");
   carritoPage.classList.remove("hidden");
   actualizarCarritoItems();
 }
@@ -270,6 +402,7 @@ function mostrarCarrito(){
 function ocultarSecciones(){
   cafeMolidoPage.classList.add("hidden");
   cafeGranoPage.classList.add("hidden");
+  cafeterasPage.classList.add("hidden");
   carritoPage.classList.add("hidden");
   productos.classList.remove("hidden");
 }
@@ -277,19 +410,28 @@ function ocultarSecciones(){
 function actualizarCarritoItems(){
   const cart = JSON.parse(localStorage.getItem("carrito")) || [];
   const cont = document.getElementById("carritoItems");
+  const btnVaciar = document.getElementById("btnVaciar");
   cont.innerHTML = "";
   let total = 0;
 
+  if(cart.length === 0){
+    cont.innerHTML = "<p style='color:#ccc;'>Tu carrito está vacío.</p>";
+    btnVaciar.style.display = "none";
+    totalCarrito.textContent = "Total: S/0.00";
+    return;
+  }
+
+  btnVaciar.style.display = "inline-block";
   cart.forEach((p,i)=>{
     total+=p.precio;
     cont.innerHTML += `
       <div class="carrito-item">
-        <p>${p.nombre} - $${p.precio.toFixed(2)}</p>
+        <p><b>${p.nombre}</b><br>S/${p.precio.toFixed(2)}</p>
         <button class="eliminar" onclick="eliminarProducto(${i})">Eliminar</button>
       </div>`;
   });
 
-  totalCarrito.textContent = "Total: $" + total.toFixed(2);
+  totalCarrito.textContent = "Total: S/" + total.toFixed(2);
 }
 
 function eliminarProducto(i){
@@ -300,29 +442,53 @@ function eliminarProducto(i){
   actualizarCarritoItems();
 }
 
+function vaciarCarrito(){
+  if(confirm("¿Seguro que deseas vaciar tu carrito?")){
+    localStorage.removeItem("carrito");
+    actualizarCarrito();
+    actualizarCarritoItems();
+  }
+}
+
 function enviarPedidoWhatsApp(){
   const nombre = nombreCliente.value.trim();
-  const direccion = direccionCliente.value.trim();
   const telefono = telefonoCliente.value.trim();
+  const departamento = departamentoCliente.value.trim();
+  const provincia = provinciaCliente.value.trim();
+  const distrito = distritoCliente.value.trim();
+  const direccion = direccionCliente.value.trim();
+  const referencia = referenciaCliente.value.trim();
+  const entrega = entregaCliente.value;
+  const notas = notasCliente.value.trim();
   const cart = JSON.parse(localStorage.getItem("carrito")) || [];
 
-  if(!nombre || !direccion || !telefono || cart.length===0){
-    alert("Completa los datos y agrega productos");
+  if(!nombre || !telefono || !departamento || !provincia || !distrito || !direccion || cart.length === 0){
+    alert("Por favor complete los campos obligatorios (*) y añada productos.");
     return;
   }
 
-  let msg = `☕ *NUEVO PEDIDO - ORGANIC COFFEE* ☕%0A%0A`;
-  msg += `👤 ${nombre}%0A📍 ${direccion}%0A📞 ${telefono}%0A%0A🛒 Productos:%0A`;
+  let msg = `☕ *NUEVO PEDIDO - GM ORGANIC COFFEE* ☕%0A%0A`;
+  msg += `👤 *Cliente:* ${nombre}%0A`;
+  msg += `📞 *Teléfono:* ${telefono}%0A`;
+  msg += `🚚 *Método:* ${entrega}%0A`;
+  msg += `📍 *Ubicación:* ${departamento} / ${provincia} / ${distrito}%0A`;
+  msg += `🏠 *Dirección:* ${direccion}%0A`;
+  if(referencia) msg += `🗺️ *Referencia:* ${referencia}%0A`;
+  if(notas) msg += `📝 *Notas/Molienda:* ${notas}%0A`;
+  
+  msg += `%0A🛒 *Productos:*%0A`;
 
   let total=0;
   cart.forEach((p,i)=>{
-    msg += `${i+1}. ${p.nombre} - $${p.precio.toFixed(2)}%0A`;
+    msg += `${i+1}. ${p.nombre} - S/${p.precio.toFixed(2)}%0A`;
     total+=p.precio;
   });
 
-  msg += `%0A💰 *Total:* ${total.toFixed(2)}%0A`;
-  msg += `👉 Indicar medio de pago, por favor.`;
+  msg += `%0A💰 *Total Productos:* S/${total.toFixed(2)}%0A`;
+  msg += `🛵 _(Costo de envío a coordinar por este medio)_%0A%0A`;
+  msg += `👉 *Por favor envíenme su código YAPE/PLIN o cuentas bancarias para proceder con el pago.*`;
 
+  // Limpiar carrito tras enviar
   localStorage.removeItem("carrito");
   actualizarCarrito();
 
