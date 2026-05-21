@@ -8,7 +8,7 @@
 <style>
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: 'Segoe UI', Arial, sans-serif;
   background: url('https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=1350&q=80')
     no-repeat center center fixed;
   background-size: cover;
@@ -21,7 +21,7 @@ body {
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0,0,0,0.55);
   padding: 20px;
   position: relative;
 }
@@ -37,6 +37,7 @@ body {
   font-size: 3rem;
   font-weight: bold;
   color: #2e8b57;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
 }
 
 .cart {
@@ -45,16 +46,19 @@ body {
   right: 30px;
   font-size: 32px;
   cursor: pointer;
+  transition: transform 0.2s;
 }
+.cart:hover { transform: scale(1.1); }
 
 .cart span {
-  background: red;
+  background: #e74c3c;
   border-radius: 50%;
   padding: 4px 10px;
   font-size: 14px;
   position: absolute;
   top: -10px;
   right: -15px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
 }
 
 .btn-productos {
@@ -66,7 +70,10 @@ body {
   font-size: 1.2rem;
   border-radius: 8px;
   cursor: pointer;
+  box-shadow: 0 4px 15px rgba(76,175,80,0.4);
+  transition: background 0.3s;
 }
+.btn-productos:hover { background-color: #45a049; }
 
 .whatsapp {
   margin-top: 20px;
@@ -76,6 +83,7 @@ body {
   color: white;
   text-decoration: none;
   font-weight: bold;
+  box-shadow: 0 4px 15px rgba(37,211,102,0.3);
 }
 
 .productos, .carrito-page {
@@ -85,7 +93,13 @@ body {
   margin-top: 40px;
   gap: 25px;
   padding: 40px;
-  background-color: rgba(0,0,0,0.6);
+  background-color: rgba(0,0,0,0.65);
+  backdrop-filter: blur(8px);
+}
+
+.carrito-page {
+  flex-direction: column;
+  align-items: center;
 }
 
 .producto, .carrito-item {
@@ -95,6 +109,7 @@ body {
   width: 300px;
   padding: 20px;
   text-align: center;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.3);
 }
 
 .producto img {
@@ -110,78 +125,198 @@ button {
   background-color: #4CAF50;
   color: white;
   border: none;
-  padding: 10px 15px;
+  padding: 12px 18px;
   border-radius: 8px;
   cursor: pointer;
   margin-top: 10px;
+  font-weight: bold;
 }
 
-button.eliminar { background-color: #f44336; }
-button.vaciar { background-color: #ff9800; margin-bottom: 15px; }
-button.pagar { background-color: #2e8b57; width: 100%; font-size: 1.2rem; padding: 15px; font-weight: bold; }
+button.eliminar { background-color: #e74c3c; }
+button.vaciar { background-color: #ff9800; margin-bottom: 25px; box-shadow: 0 4px 10px rgba(255,152,0,0.2); }
+button.pagar { 
+  background: linear-gradient(135deg, #2e8b57, #4CAF50);
+  width: 100%; 
+  max-width: 500px; 
+  font-size: 1.2rem; 
+  padding: 16px; 
+  font-weight: bold; 
+  margin-top: 25px; 
+  border-radius: 10px;
+  box-shadow: 0 5px 20px rgba(46,139,87,0.4);
+  transition: transform 0.2s;
+}
+button.pagar:active { transform: scale(0.98); }
 .back-button { background-color: #555; width: 100%; max-width: 200px; margin: 20px auto 0 auto; display: block; }
 
 .footer-text {
   text-align: center;
   padding: 15px;
-  background-color: rgba(0,0,0,0.6);
+  background-color: rgba(0,0,0,0.7);
 }
 
-/* Estilos para el formulario del carrito */
-.carrito-page input, .carrito-page select, .carrito-page textarea {
-  width: 90%;
+/* --- BLOQUES DE FORMULARIO ESTILIZADOS --- */
+.bloque-formulario {
+  width: 100%;
   max-width: 500px;
-  padding: 12px;
-  margin-bottom: 12px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  font-size: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 25px;
+  background: rgba(255, 255, 255, 0.06);
+  padding: 20px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
 }
 
+.carrito-page input, .carrito-page select, .carrito-page textarea {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 14px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(255, 255, 255, 0.95);
+  color: #222;
+  font-size: 1rem;
+  box-sizing: border-box;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.carrito-page input::placeholder, .carrito-page textarea::placeholder {
+  color: #777;
+}
+
+.carrito-page input:focus, .carrito-page select:focus, .carrito-page textarea:focus {
+  outline: none;
+  border: 2px solid #4CAF50;
+  background: #ffffff;
+}
+
 .carrito-page textarea {
-  height: 80px;
+  height: 90px;
   resize: none;
   font-family: Arial, sans-serif;
 }
 
-.ubicacion-grupo {
+.label-formulario {
   width: 100%;
+  text-align: left;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+  color: #4CAF50;
+  font-weight: bold;
+  border-bottom: 2px solid rgba(76, 175, 80, 0.3);
+  padding-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.label-sub {
+  width: 100%;
+  text-align: left;
+  margin-bottom: 6px;
+  font-size: 0.95rem;
+  color: #e0e0e0;
+  font-weight: bold;
+}
+
+/* Opciones de pago en botones Modernos */
+.contenedor-opciones-pago {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  gap: 15px;
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+.btn-opcion-pago {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  padding: 15px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-top: 0;
+}
+
+.btn-opcion-pago:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.btn-opcion-pago.seleccionado {
+  background: #2e8b57;
+  border-color: #4CAF50;
+  color: #ffffff;
+  box-shadow: 0 0 15px rgba(76, 175, 80, 0.6);
+}
+
+/* Bloques informativos de Pago Dinámicos */
+.bloque-pago-dinamico {
+  width: 100%;
+  background-color: #ffffff;
+  color: #222;
+  padding: 20px;
+  border-radius: 14px;
+  margin-top: 15px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+  box-sizing: border-box;
+}
+
+.bloque-pago-dinamico img {
+  width: 190px;
+  height: 190px;
+  object-fit: contain;
+  margin-top: 12px;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 5px;
+}
+
+.alerta-banco {
+  text-align: left;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  border-left: 5px solid #c0392b;
 }
 
 .seccion-instrucciones {
+  width: 100%;
   max-width: 500px;
-  background: rgba(255,255,255,0.1);
-  padding: 15px;
-  border-radius: 8px;
-  margin-bottom: 20px;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 18px;
+  border-radius: 12px;
+  margin-bottom: 25px;
   text-align: left;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   border-left: 4px solid #2e8b57;
+  box-sizing: border-box;
+  line-height: 1.5;
 }
 
 .seccion-instrucciones h4 {
   margin: 0 0 8px 0;
   color: #4CAF50;
+  font-size: 1.05rem;
 }
 
 .seccion-instrucciones ol {
   margin: 0;
   padding-left: 20px;
-}
-
-.seccion-instrucciones li {
-  margin-bottom: 5px;
+  color: #ddd;
 }
 </style>
 </head>
 
 <body>
 
-<!-- PORTADA -->
 <div class="container">
   <img src="logo.jpeg" class="logo-local">
   <div class="GM organic-coffee"> GM Organic Coffee </div>
@@ -197,7 +332,6 @@ button.pagar { background-color: #2e8b57; width: 100%; font-size: 1.2rem; paddin
   </a>
 </div>
 
-<!-- CATEGORÍAS -->
 <div id="productos" class="productos">
   <div class="producto" onclick="mostrarCafeMolido()">
     <img src="https://www.nescafe.com/co/sites/default/files/2024-06/cafe-tostado-y-molido_desktop.jpg">
@@ -218,7 +352,6 @@ button.pagar { background-color: #2e8b57; width: 100%; font-size: 1.2rem; paddin
   </div>
 </div>
 
-<!-- CAFE MOLIDO -->
 <div id="cafeMolidoPage" class="productos hidden">
   <div class="producto">
     <img src="product.jpeg">
@@ -244,7 +377,6 @@ button.pagar { background-color: #2e8b57; width: 100%; font-size: 1.2rem; paddin
   <button class="back-button" onclick="ocultarSecciones()">← Volver</button>
 </div>
 
-<!-- CAFE EN GRANO -->
 <div id="cafeGranoPage" class="productos hidden">
   <div class="producto">
     <img src="product.jpeg">
@@ -270,7 +402,6 @@ button.pagar { background-color: #2e8b57; width: 100%; font-size: 1.2rem; paddin
   <button class="back-button" onclick="ocultarSecciones()">← Volver</button>
 </div>
 
-<!-- CAFETERAS Y ACCESORIOS -->
 <div id="cafeterasPage" class="productos hidden">
   <div class="producto">
     <img src="Prensa.png">
@@ -296,48 +427,80 @@ button.pagar { background-color: #2e8b57; width: 100%; font-size: 1.2rem; paddin
   <button class="back-button" onclick="ocultarSecciones()">← Volver</button>
 </div>
 
-<!-- CARRITO AVANZADO -->
 <div id="carritoPage" class="carrito-page hidden">
   <h2>🛒 Tu Carrito de Compras</h2>
 
-  <!-- Sección informativa de pago -->
   <div class="seccion-instrucciones">
-    <h4>¿Cómo realizo mi pago?</h4>
+    <h4>¿Cómo finalizar tu compra?</h4>
     <ol>
-      <li>Completa tus datos de envío abajo.</li>
-      <li>Presiona el botón verde para enviar el pedido a nuestro WhatsApp.</li>
-      <li>Te responderemos con el costo del envío y nuestros QR de <b>Yape, Plin</b> o cuentas bancarias para cerrar tu compra.</li>
+      <li>Llena tus datos obligatorios de entrega.</li>
+      <li>Elige si deseas envío a tu casa o recojo en agencia.</li>
+      <li>Selecciona tu medio de pago preferido para ver las instrucciones.</li>
+      <li>Presiona el botón verde para registrar tu pedido.</li>
     </ol>
   </div>
 
-  <input id="nombreCliente" placeholder="Nombre completo *">
-  <input id="telefonoCliente" placeholder="Teléfono / WhatsApp *">
-  
-  <div class="ubicacion-grupo">
-    <input id="departamentoCliente" placeholder="Departamento * (Ej: Lima, Piura)">
-    <input id="provinciaCliente" placeholder="Provincia * (Ej: Lima, Sullana)">
-    <input id="distritoCliente" placeholder="Distrito * (Ej: Miraflores, Tambogrande)">
+  <div class="bloque-formulario">
+    <div class="label-formulario">Paso 1: Datos de Entrega</div>
+    <input id="nombreCliente" placeholder="Nombre completo *">
+    <input id="telefonoCliente" placeholder="Teléfono / WhatsApp *">
+    
+    <div class="ubicacion-grupo">
+      <input id="departamentoCliente" placeholder="Departamento * (Ej: Lima, Piura)">
+      <input id="provinciaCliente" placeholder="Provincia * (Ej: Sullana, Piura)">
+      <input id="distritoCliente" placeholder="Distrito * (Ej: Tambogrande, Catacaos)">
+    </div>
+    
+    <input id="direccionCliente" placeholder="Dirección exacta * (Av, Calle, Nro, Dpto)">
+    <input id="referenciaCliente" placeholder="Referencia de la casa (Ej: Frente a parque)">
+    
+    <div class="label-sub">Método de entrega:</div>
+    <select id="entregaCliente" onchange="controlarVisualizacionAgencia()">
+      <option value="Envío a domicilio">🚚 Envío a domicilio</option>
+      <option value="Recojo en Agencia">🏪 Recojo en Agencia</option>
+    </select>
+
+    <div id="contenedorAgencia" style="display: none; width: 100%;">
+      <input id="agenciaCliente" placeholder="¿En qué agencia deseas el recojo? * (Ej: Shalom, Olva)">
+    </div>
+
+    <textarea id="notesCliente" placeholder="Notas adicionales (Molienda, si es regalo, etc.)"></textarea>
   </div>
-  
-  <input id="direccionCliente" placeholder="Dirección exacta * (Av, Calle, Nro, Dpto)">
-  <input id="referenciaCliente" placeholder="Referencia de la casa (Ej: Frente a parque)">
-  
-  <!-- Tipo de Entrega -->
-  <select id="entregaCliente">
-    <option value="Envío a domicilio">🛵 Deseo Envío a Domicilio / Oficina</option>
-    <option value="Recojo en Agencia (Shalom/Olva)">📦 Deseo Recojo en Agencia (Shalom / Olva Courier)</option>
-  </select>
 
-  <!-- Notas especiales -->
-  <textarea id="notasCliente" placeholder="Notas adicionales (Ej: Tipo de molienda Fina/Gruesa, si es para regalo, etc.)"></textarea>
+  <div class="bloque-formulario">
+    <div class="label-formulario">Paso 2: Medio de Pago</div>
+    <div class="contenedor-opciones-pago">
+      <button type="button" class="btn-opcion-pago" id="btnPagoQR" onclick="seleccionarMedioPago('Yape / Plin')">
+        📱 Yape / Plin
+      </button>
+      <button type="button" class="btn-opcion-pago" id="btnPagoBanco" onclick="seleccionarMedioPago('Transferencia Bancaria')">
+        🏦 Transferencia
+      </button>
+    </div>
 
-  <div id="carritoItems"></div>
+    <div id="seccionQR" class="bloque-pago-dinamico" style="display: none;">
+      <p style="margin:0 0 8px 0; font-weight:bold; color:#111; font-size: 1.05rem;">Escanea con tu App para pagar:</p>
+      <img src="QR.jpeg" alt="QR de Pago GM Organic Coffee">
+      <p style="font-size:0.85rem; color:#555; margin-top:10px; font-style:italic; line-height: 1.4;">
+        Recuerda tomarle una captura a tu pantalla tras realizar el pago para adjuntarla por WhatsApp.
+      </p>
+    </div>
+
+    <div id="seccionBanco" class="bloque-pago-dinamico alerta-banco" style="display: none;">
+      <b style="color: #c0392b; font-size: 1.05rem;">📌 Información de Cuentas:</b><br>
+      <p style="font-size:0.95rem; color:#333; margin: 6px 0 0 0;">
+        Al presionar el botón verde de abajo, registrarás tu pedido y te enviaremos de inmediato nuestras cuentas bancarias oficiales junto al monto final con envío.
+      </p>
+    </div>
+  </div>
+
+  <div id="carritoItems" style="width: 100%; display: flex; flex-direction: column; align-items: center; gap: 10px; margin-top: 15px;"></div>
   
   <button class="vaciar" id="btnVaciar" onclick="vaciarCarrito()">🗑️ Vaciar Carrito</button>
   
-  <h3 id="totalCarrito">Total: S/0.00</h3>
+  <h3 id="totalCarrito" style="font-size: 1.6rem; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); margin: 10px 0;">Total: S/0.00</h3>
 
-  <button class="pagar" onclick="enviarPedidoWhatsApp()">👉 Confirmar y pedir por WhatsApp</button>
+  <button class="pagar" onclick="enviarPedidoWhatsApp()">👉 Confirmar Pedido y Finalizar</button>
   <button class="back-button" onclick="ocultarSecciones()">← Volver a la tienda</button>
 </div>
 
@@ -359,7 +522,15 @@ const distritoCliente = document.getElementById("distritoCliente");
 const direccionCliente = document.getElementById("direccionCliente");
 const referenciaCliente = document.getElementById("referenciaCliente");
 const entregaCliente = document.getElementById("entregaCliente");
-const notasCliente = document.getElementById("notasCliente");
+const agenciaCliente = document.getElementById("agenciaCliente");
+const contenedorAgencia = document.getElementById("contenedorAgencia");
+const notesCliente = document.getElementById("notesCliente");
+
+let medioPagoSeleccionado = ""; 
+const btnPagoQR = document.getElementById("btnPagoQR");
+const btnPagoBanco = document.getElementById("btnPagoBanco");
+const seccionQR = document.getElementById("seccionQR");
+const seccionBanco = document.getElementById("seccionBanco");
 
 function actualizarCarrito(){
   const cart = JSON.parse(localStorage.getItem("carrito")) || [];
@@ -395,8 +566,20 @@ function mostrarCarrito(){
   cafeMolidoPage.classList.add("hidden");
   cafeGranoPage.classList.add("hidden");
   cafeterasPage.classList.add("hidden");
+  
   carritoPage.classList.remove("hidden");
   actualizarCarritoItems();
+  
+  medioPagoSeleccionado = "";
+  btnPagoQR.classList.remove("seleccionado");
+  btnPagoBanco.classList.remove("seleccionado");
+  seccionQR.style.display = "none";
+  seccionBanco.style.display = "none";
+  agenciaCliente.value = "";
+  entregaCliente.value = "Envío a domicilio";
+  contenedorAgencia.style.display = "none";
+
+  nombreCliente.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
 function ocultarSecciones(){
@@ -405,6 +588,33 @@ function ocultarSecciones(){
   cafeterasPage.classList.add("hidden");
   carritoPage.classList.add("hidden");
   productos.classList.remove("hidden");
+}
+
+function controlarVisualizacionAgencia() {
+  if (entregaCliente.value === "Recojo en Agencia") {
+    contenedorAgencia.style.display = "block";
+  } else {
+    contenedorAgencia.style.display = "none";
+    agenciaCliente.value = "";
+  }
+}
+
+function seleccionarMedioPago(metodo) {
+  medioPagoSeleccionado = metodo;
+  
+  if (metodo === "Yape / Plin") {
+    btnPagoQR.classList.add("seleccionado");
+    btnPagoBanco.classList.remove("seleccionado");
+    seccionQR.style.display = "block";
+    seccionBanco.style.display = "none";
+    seccionQR.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  } else if (metodo === "Transferencia Bancaria") {
+    btnPagoBanco.classList.add("seleccionado");
+    btnPagoQR.classList.remove("seleccionado");
+    seccionQR.style.display = "none";
+    seccionBanco.style.display = "block";
+    seccionBanco.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
 }
 
 function actualizarCarritoItems(){
@@ -425,8 +635,8 @@ function actualizarCarritoItems(){
   cart.forEach((p,i)=>{
     total+=p.precio;
     cont.innerHTML += `
-      <div class="carrito-item">
-        <p><b>${p.nombre}</b><br>S/${p.precio.toFixed(2)}</p>
+      <div class="carrito-item" style="width:100%; max-width:500px; box-sizing: border-box; background: #fff; border-radius: 10px;">
+        <p style="margin:5px 0; font-size:1.05rem; color:#111;"><b>${p.nombre}</b><br><span style="color:#2e8b57; font-weight:bold;">S/${p.precio.toFixed(2)}</span></p>
         <button class="eliminar" onclick="eliminarProducto(${i})">Eliminar</button>
       </div>`;
   });
@@ -457,9 +667,10 @@ function enviarPedidoWhatsApp(){
   const provincia = provinciaCliente.value.trim();
   const distrito = distritoCliente.value.trim();
   const direccion = direccionCliente.value.trim();
-  const referencia = referenciaCliente.value.trim();
+  const referencia = referenciaCliente.value.trim() || "Ninguna";
   const entrega = entregaCliente.value;
-  const notas = notasCliente.value.trim();
+  const agencia = agenciaCliente.value.trim();
+  const notas = notesCliente.value.trim() || "Ninguna";
   const cart = JSON.parse(localStorage.getItem("carrito")) || [];
 
   if(!nombre || !telefono || !departamento || !provincia || !distrito || !direccion || cart.length === 0){
@@ -467,28 +678,81 @@ function enviarPedidoWhatsApp(){
     return;
   }
 
+  if(entrega === "Recojo en Agencia" && !agencia){
+    alert("Por favor indique la Agencia de transporte en la que desea retirar su producto.");
+    return;
+  }
+  
+  if(!medioPagoSeleccionado){
+    alert("Por favor, elija un método de pago en el Paso 2 antes de continuar.");
+    return;
+  }
+
+  let resumenProductos = "";
+  let total = 0;
+  cart.forEach((p, i) => {
+    resumenProductos += `${p.nombre}; `;
+    total += p.precio;
+  });
+
+  // !!! REEMPLAZA ESTO CON LA URL QUE OBTUVISTE EN APPS SCRIPT !!!
+  const URL_MI_SHEETS = "TU_URL_DE_APPS_SCRIPT";
+  
+  const textoMetodoDetallado = entrega === "Recojo en Agencia" ? `${entrega} (Agencia: ${agencia})` : entrega;
+  const notasConPago = `[Pago: ${medioPagoSeleccionado}] [Entrega: ${textoMetodoDetallado}] - ${notas}`;
+
+  const objetoDatos = {
+    nombre: nombre,
+    telefono: telefono,
+    departamento: departamento,
+    provincia: provincia,
+    distrito: distrito,
+    direccion: direccion,
+    referencia: referencia,
+    entrega: textoMetodoDetallado,
+    notes: notasConPago,
+    productos: resumenProductos,
+    total: "S/ " + total.toFixed(2)
+  };
+
+  fetch(URL_MI_SHEETS, {
+    method: "POST",
+    mode: "no-cors",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(objetoDatos)
+  }).catch(err => console.log("Error enviando al Sheets: ", err));
+
   let msg = `☕ *NUEVO PEDIDO - GM ORGANIC COFFEE* ☕%0A%0A`;
   msg += `👤 *Cliente:* ${nombre}%0A`;
   msg += `📞 *Teléfono:* ${telefono}%0A`;
-  msg += `🚚 *Método:* ${entrega}%0A`;
+  
+  if(entrega === "Recojo en Agencia"){
+    msg += `🏪 *Método:* ${entrega} (${agencia})%0A`;
+  } else {
+    msg += `🚚 *Método:* ${entrega}%0A`;
+  }
+  
   msg += `📍 *Ubicación:* ${departamento} / ${provincia} / ${distrito}%0A`;
   msg += `🏠 *Dirección:* ${direccion}%0A`;
-  if(referencia) msg += `🗺️ *Referencia:* ${referencia}%0A`;
-  if(notas) msg += `📝 *Notas/Molienda:* ${notas}%0A`;
-  
+  if(referencia !== "Ninguna") msg += `🗺️ *Referencia:* ${referencia}%0A`;
+  msg += `💳 *Medio de Pago elegido:* ${medioPagoSeleccionado}%0A`;
+  if(notas !== "Ninguna") msg += `📝 *Notes/Molienda:* ${notas}%0A`;
   msg += `%0A🛒 *Productos:*%0A`;
 
-  let total=0;
   cart.forEach((p,i)=>{
     msg += `${i+1}. ${p.nombre} - S/${p.precio.toFixed(2)}%0A`;
-    total+=p.precio;
   });
 
-  msg += `%0A💰 *Total Productos:* S/${total.toFixed(2)}%0A`;
-  msg += `🛵 _(Costo de envío a coordinar por este medio)_%0A%0A`;
-  msg += `👉 *Por favor envíenme su código YAPE/PLIN o cuentas bancarias para proceder con el pago.*`;
+  msg += `%0A💰 *Total Productos:* S/${total.toFixed(2)}%0A%0A`;
 
-  // Limpiar carrito tras enviar
+  if(medioPagoSeleccionado === "Yape / Plin") {
+    msg += `📸 *[ALERTA DE COMPROBANTE]*%0A`;
+    msg += `Ya escaneé el código QR en la tienda. *A continuación adjunto la captura de pantalla de mi Yape/Plin* para que pueda validar el pago de mi pedido. 👇✨`;
+  } else {
+    msg += `🏦 *[SOLICITUD DE TRANSFERENCIA]*%0A`;
+    msg += `He seleccionado pago por transferencia bancaria. Por favor envíeme sus números de cuenta (junto al costo de envío si aplica) para realizar el depósito y mandarle el comprobante por aquí.`;
+  }
+
   localStorage.removeItem("carrito");
   actualizarCarrito();
 
